@@ -296,3 +296,31 @@
         background-color: #f5f5f5;
     }
     }
+
+    /* TALLAS */
+.tallas {
+  display: flex;
+  gap: 8px;
+  margin: 10px 0;
+  flex-wrap: wrap;
+}
+
+.talla-btn {
+  border: 1px solid #222;
+  background: none;
+  padding: 4px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.2s ease;
+}
+
+.talla-btn:hover {
+  background-color: #222;
+  color: #fff;
+}
+
+.talla-btn.seleccionada {
+  background-color: #222;
+  color: #fff;
+}
