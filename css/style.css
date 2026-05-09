@@ -161,6 +161,27 @@
   display: block;
 }
 
+/* NOTIFICACIÓN AL AGREGAR */
+.notificacion {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background-color: #222;
+  color: #fff;
+  padding: 12px 28px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  z-index: 2000;
+  transition: transform 0.3s ease;
+  pointer-events: none;
+}
+
+.notificacion.visible {
+  transform: translateX(-50%) translateY(0);
+}
+
 /* CATEGORÍAS */
 .categorias {
   display: flex;

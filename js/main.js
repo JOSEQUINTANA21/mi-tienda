@@ -94,6 +94,7 @@ function agregarAlCarrito(nombre, precio, imagen, talla) {
     carrito.push({ nombre, precio, imagen, talla, cantidad: 1 });
   }
   actualizarContador();
+  mostrarNotificacion();
 }
 
 // ACTUALIZAR CONTADOR
@@ -161,6 +162,13 @@ function cerrar() {
   overlay.classList.remove('activo');
 }
 
+// NOTIFICACIÓN
+function mostrarNotificacion() {
+  const notif = document.getElementById('notificacion');
+  notif.classList.add('visible');
+  setTimeout(() => notif.classList.remove('visible'), 2000);
+}
+
 // FINALIZAR COMPRA
 function finalizarCompra() {
   if (carrito.length === 0) return;
@@ -192,4 +200,4 @@ document.querySelectorAll('.cat-btn').forEach(btn => {
 });
 
 // INICIAR
-filtrarProductos('todas');
+filtrarProductos('todas');  
