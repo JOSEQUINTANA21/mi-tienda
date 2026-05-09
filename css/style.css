@@ -448,3 +448,60 @@
   background-color: #222;
   color: #fff;
 }
+
+/* NOSOTROS */
+.nosotros {
+  padding: 80px 40px;
+  text-align: center;
+  background-color: #fff;
+}
+
+.nosotros-contenido {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.nosotros h2 {
+  font-size: 24px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.nosotros p {
+  font-size: 15px;
+  color: #666;
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.nosotros-valores {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.valor {
+  padding: 30px 20px;
+  border: 1px solid #eee;
+}
+
+.valor span {
+  font-size: 32px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.valor h4 {
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.valor p {
+  font-size: 13px;
+  color: #888;
+  margin: 0;
+}
