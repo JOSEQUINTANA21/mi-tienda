@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Tienda</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- NAVEGACIÓN -->
+    <header>
+    <nav>
+          <h1 class="logo">LOGO</h1>
+  <ul>
+    <li><a href="#">Inicio</a></li>
+    <li><a href="#">Productos</a></li>
+    <li><a href="#">Nosotros</a></li>
+  </ul>
+  <div class="carrito-icon">
+    🛒 <span id="contador">0</span>
+  </div>
+    </nav>
+    </header>
+
+    <!-- HERO (primera pantalla) -->
+    <section class="hero">
+        <h2>Nueva Colección</h2>
+        <p>Estilo que habla por ti</p>
+        <a href="#" class="btn">Ver productos</a>
+    </section>
+
+    <!-- PRODUCTOS -->
+    <section class="productos">
+        <h2>Lo más vendido</h2>
+        <div class="grid-productos">
+            <div class="tarjeta">
+    <img src="img/principal/img1.jpg" alt="Producto 1" style="object-position: center top;">
+    <h3>Nombre del producto</h3>
+    <p>S/ 89.00</p>
+    <a href="#" class="btn-comprar" data-nombre="Producto 1" data-precio="89" data-imagen="../img/principal/img1.jpg">Agregar al carrito</a>
+</div>
+
+<div class="tarjeta">
+    <img src="img/principal/img2.jpg" alt="Producto 2" style="object-position: center center;">
+    <h3>Nombre del producto</h3>
+    <p>S/ 109.00</p>
+    <a href="#" class="btn-comprar" data-nombre="Producto 2" data-precio="109" data-imagen="../img/principal/img2.jpg">Agregar al carrito</a>
+</div>
+
+<div class="tarjeta">
+    <img src="img/principal/img3.jpg" alt="Producto 3" style="object-position: center top;">
+    <h3>Nombre del producto</h3>
+    <p>S/ 129.00</p>
+    <a href="#" class="btn-comprar" data-nombre="Producto 3" data-precio="129" data-imagen="../img/principal/img3.jpg">Agregar al carrito</a>
+</div>
+    <!-- aquí van las tarjetas de productos -->
+    </div>
+    </section>
+
+    <!-- PANEL DEL CARRITO -->
+<div class="carrito-panel" id="carritoPanel">
+  <div class="carrito-header">
+    <h3>Tu carrito</h3>
+    <span id="cerrarCarrito">✕</span>
+  </div>
+  <div class="carrito-items" id="carritoItems">
+    <!-- aquí aparecen los productos -->
+  </div>
+  <div class="carrito-footer">
+    <p>Total: <strong id="carritoTotal">S/ 0.00</strong></p>
+    <a href="#" class="btn" id="btnFinalizar">Finalizar compra</a>
+  </div>
+</div>
+
+<!-- OVERLAY OSCURO -->
+<div class="overlay" id="overlay"></div>
+
+    <!-- PIE DE PÁGINA -->  
+    <footer>
+    <p>síguenos en TikTok · Instagram · WhatsApp</p>
+    <p style="margin-top: 12px;">© 2025 Tu Tienda — Todos los derechos reservados</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
