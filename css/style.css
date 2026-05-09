@@ -161,6 +161,36 @@
   display: block;
 }
 
+/* CATEGORÍAS */
+.categorias {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding: 30px 20px;
+  background-color: #fff;
+}
+
+.cat-btn {
+  border: 1px solid #222;
+  background: none;
+  padding: 8px 20px;
+  font-size: 12px;
+  cursor: pointer;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+
+.cat-btn:hover {
+  background-color: #222;
+  color: #fff;
+}
+
+.cat-btn.activa {
+  background-color: #222;
+  color: #fff;
+}
+
     /* BOTÓN */
     .btn {
     text-decoration: none;

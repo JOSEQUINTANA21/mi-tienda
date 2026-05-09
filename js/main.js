@@ -1,35 +1,71 @@
-// PRODUCTOS EN EL CARRITO
+// CARRITO
 let carrito = [];
 
-// BASE DE DATOS DE PRODUCTOS
+// PRODUCTOS
 const productos = [
   {
     id: 1,
     nombre: "Producto 1",
     precio: 89,
     imagen: "img/principal/img1.jpg",
-    tallas: ["XS", "S", "M", "L", "XL"]
+    tallas: ["XS", "S", "M", "L", "XL"],
+    categoria: "poleras"
   },
   {
     id: 2,
     nombre: "Producto 2",
     precio: 109,
     imagen: "img/principal/img2.jpg",
-    tallas: ["S", "M", "L", "XL"]
+    tallas: ["S", "M", "L", "XL"],
+    categoria: "abrigos"
   },
   {
     id: 3,
     nombre: "Producto 3",
     precio: 89,
     imagen: "img/principal/img3.jpg",
-    tallas: ["XS", "S", "M", "L"]
+    tallas: ["XS", "S", "M", "L"],
+    categoria: "abrigos"
   }
 ];
 
-// GENERAR TARJETAS
-function renderizarProductos() {
+// REGISTRAR EVENTOS DE TARJETAS
+function registrarEventosTarjetas() {
+  document.querySelectorAll('.talla-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const tarjeta = this.closest('.tarjeta');
+      tarjeta.querySelectorAll('.talla-btn').forEach(b => b.classList.remove('seleccionada'));
+      this.classList.add('seleccionada');
+      tarjeta.querySelector('.btn-comprar').dataset.talla = this.dataset.talla;
+    });
+  });
+
+  document.querySelectorAll('.btn-comprar').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const talla = this.dataset.talla;
+      if (!talla) {
+        alert('Por favor selecciona una talla');
+        return;
+      }
+      agregarAlCarrito(
+        this.dataset.nombre,
+        Number.parseFloat(this.dataset.precio),
+        this.dataset.imagen,
+        talla
+      );
+    });
+  });
+}
+
+// FILTRAR Y RENDERIZAR PRODUCTOS
+function filtrarProductos(categoria) {
+  const filtrados = categoria === 'todas'
+    ? productos
+    : productos.filter(p => p.categoria === categoria);
+
   const grid = document.querySelector('.grid-productos');
-  grid.innerHTML = productos.map(p => `
+  grid.innerHTML = filtrados.map(p => `
     <div class="tarjeta">
       <img src="${p.imagen}" alt="${p.nombre}" loading="lazy">
       <h3>${p.nombre}</h3>
@@ -46,31 +82,7 @@ function renderizarProductos() {
     </div>
   `).join('');
 
-  // EVENTOS TALLAS
-  document.querySelectorAll('.talla-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-      const tarjeta = this.closest('.tarjeta');
-      tarjeta.querySelectorAll('.talla-btn').forEach(b => b.classList.remove('seleccionada'));
-      this.classList.add('seleccionada');
-      tarjeta.querySelector('.btn-comprar').dataset.talla = this.dataset.talla;
-    });
-  });
-
-  // EVENTOS AGREGAR AL CARRITO
-  document.querySelectorAll('.btn-comprar').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-      e.preventDefault();
-      const talla = this.dataset.talla;
-      if (!talla) {
-        alert('Por favor selecciona una talla');
-        return;
-      }
-      const nombre = this.dataset.nombre;
-      const precio = Number.parseFloat(this.dataset.precio);
-      const imagen = this.dataset.imagen;
-      agregarAlCarrito(nombre, precio, imagen, talla);
-    });
-  });
+  registrarEventosTarjetas();
 }
 
 // AGREGAR AL CARRITO
@@ -90,7 +102,7 @@ function actualizarContador() {
   document.getElementById('contador').textContent = total;
 }
 
-// MOSTRAR PRODUCTOS EN EL PANEL
+// RENDERIZAR CARRITO
 function renderizarCarrito() {
   const contenedor = document.getElementById('carritoItems');
   const totalEl = document.getElementById('carritoTotal');
@@ -129,20 +141,18 @@ function renderizarCarrito() {
   totalEl.textContent = `S/ ${total.toFixed(2)}`;
 }
 
-// ELEMENTOS DEL PANEL
+// PANEL CARRITO
 const carritoPanel = document.getElementById('carritoPanel');
 const overlay = document.getElementById('overlay');
 const cerrarCarrito = document.getElementById('cerrarCarrito');
 const carritoIcon = document.querySelector('.carrito-icon');
 
-// ABRIR CARRITO
 carritoIcon.addEventListener('click', function() {
   carritoPanel.classList.add('abierto');
   overlay.classList.add('activo');
   renderizarCarrito();
 });
 
-// CERRAR CARRITO
 cerrarCarrito.addEventListener('click', cerrar);
 overlay.addEventListener('click', cerrar);
 
@@ -151,18 +161,16 @@ function cerrar() {
   overlay.classList.remove('activo');
 }
 
-// FINALIZAR COMPRA POR WHATSAPP
+// FINALIZAR COMPRA
 function finalizarCompra() {
   if (carrito.length === 0) return;
 
   const total = carrito.reduce((sum, p) => sum + p.precio * p.cantidad, 0);
-
   const mensaje = carrito.map(p =>
     `• ${p.nombre} - Talla: ${p.talla} x${p.cantidad} - S/ ${(p.precio * p.cantidad).toFixed(2)}`
   ).join('\n');
 
   const textoCompleto = `¡Hola! Quiero hacer un pedido:\n\n${mensaje}\n\nTotal: S/ ${total.toFixed(2)}`;
-
   const telefono = '51988294727';
   const url = `https://wa.me/${telefono}?text=${encodeURIComponent(textoCompleto)}`;
 
@@ -174,5 +182,14 @@ document.getElementById('btnFinalizar').addEventListener('click', function(e) {
   finalizarCompra();
 });
 
+// CATEGORÍAS
+document.querySelectorAll('.cat-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('activa'));
+    this.classList.add('activa');
+    filtrarProductos(this.dataset.categoria);
+  });
+});
+
 // INICIAR
-renderizarProductos();
+filtrarProductos('todas');
