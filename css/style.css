@@ -79,6 +79,57 @@
     color: #fff;
     }
 
+    /* BANNER OFERTA */
+.banner-oferta {
+  background-color: #222;
+  color: #fff;
+  text-align: center;
+  padding: 12px 20px;
+}
+
+.banner-oferta p {
+  font-size: 12px;  
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.banner-oferta strong {
+  border-bottom: 1px solid #fff;
+  padding-bottom: 1px;
+}
+
+/* CUPÓN */
+.cupon {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.cupon input {
+  flex: 1;
+  border: 1px solid #eee;
+  padding: 8px 12px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  outline: none;
+}
+
+.cupon button {
+  border: 1px solid #222;
+  background: none;
+  padding: 8px 14px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cupon button:hover {
+  background-color: #222;
+  color: #fff;
+}
+
     /* CARRITO ICON */
 .carrito-icon {
   font-size: 20px;
@@ -108,6 +159,7 @@
   flex-direction: column;
   transition: right 0.3s ease;
   padding: 30px 20px;
+  overflow: hidden;
 }
 
 .carrito-panel.abierto {
@@ -135,17 +187,38 @@
 .carrito-items {
   flex: 1;
   overflow-y: auto;
+  margin-bottom: 16px;
 }
 
 .carrito-footer {
   border-top: 1px solid #eee;
   padding-top: 20px;
   margin-top: 20px;
+  flex-shrink: 0;
 }
 
 .carrito-footer p {
   font-size: 16px;
   margin-bottom: 16px;
+}
+
+/* RESUMEN TOTAL */
+.resumen-total {
+  margin-bottom: 16px;
+}
+
+.resumen-fila {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  padding: 6px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.total-fila {
+  font-size: 15px;
+  border-bottom: none;
+  margin-top: 4px;
 }
 
 /* OVERLAY */

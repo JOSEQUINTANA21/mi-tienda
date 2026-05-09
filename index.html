@@ -23,6 +23,11 @@
     </nav>
   </header>
 
+  <!-- BANNER OFERTA -->
+  <div class="banner-oferta">
+    <p>🔥 ENVÍO GRATIS en compras mayores a S/ 200 · Usa el código <strong>TIKTOK10</strong> para 10% de descuento</p>
+  </div>
+
   <!-- HERO -->
   <section class="hero">
     <h2>Nueva Colección</h2>
@@ -31,11 +36,11 @@
   </section>
 
   <!-- CATEGORÍAS -->
-<section class="categorias">
-  <button class="cat-btn activa" data-categoria="todas">Todas</button>
-  <button class="cat-btn" data-categoria="poleras">Poleras</button>
-  <button class="cat-btn" data-categoria="abrigos">Abrigos</button>
-</section>
+  <section class="categorias">
+    <button class="cat-btn activa" data-categoria="todas">Todas</button>
+    <button class="cat-btn" data-categoria="poleras">Poleras</button>
+    <button class="cat-btn" data-categoria="abrigos">Abrigos</button>
+  </section>
 
   <!-- PRODUCTOS -->
   <section class="productos">
@@ -54,13 +59,34 @@
     <div class="carrito-items" id="carritoItems">
     </div>
     <div class="carrito-footer">
-      <p>Total: <strong id="carritoTotal">S/ 0.00</strong></p>
+      <div class="cupon">
+        <input type="text" id="cuponInput" placeholder="CÓDIGO DE DESCUENTO">
+        <button id="aplicarCupon">Aplicar</button>
+      </div>
+      <p id="mensajeCupon" style="font-size:12px; margin-top:8px;"></p>
+      <div class="resumen-total">
+        <div class="resumen-fila">
+          <span>Subtotal</span>
+          <span id="carritoSubtotal">S/ 0.00</span>
+        </div>
+        <div class="resumen-fila descuento-fila" id="descuentoFila" style="display:none;">
+          <span id="descuentoLabel">Descuento</span>
+          <span id="carritoDescuento" style="color:green;">-S/ 0.00</span>
+        </div>
+        <div class="resumen-fila total-fila">
+          <span>Total</span>
+          <strong id="carritoTotal">S/ 0.00</strong>
+        </div>
+      </div>
       <a href="#" class="btn" id="btnFinalizar">Finalizar compra</a>
     </div>
   </div>
 
   <!-- OVERLAY -->
   <div class="overlay" id="overlay"></div>
+
+  <!-- NOTIFICACIÓN -->
+  <div class="notificacion" id="notificacion">✓ Agregado al carrito</div>
 
   <!-- FOOTER -->
   <footer>
@@ -69,6 +95,5 @@
   </footer>
 
   <script src="js/main.js"></script>
-  <div class="notificacion" id="notificacion">✓ Agregado al carrito</div>
 </body>
 </html>

@@ -1,5 +1,6 @@
 // CARRITO
 let carrito = [];
+let descuento = 0;
 
 // PRODUCTOS
 const productos = [
@@ -29,6 +30,48 @@ const productos = [
   }
 ];
 
+// CUPONES
+const cupones = {
+  'TIKTOK10': 0.1,
+  'VERANO20': 0.2
+};
+
+// APLICAR CUPÓN
+document.getElementById('aplicarCupon').addEventListener('click', function() {
+  const codigo = document.getElementById('cuponInput').value.trim().toUpperCase();
+  const mensaje = document.getElementById('mensajeCupon');
+
+  if (cupones[codigo]) {
+    descuento = cupones[codigo];
+    mensaje.style.color = 'green';
+    mensaje.textContent = `✓ Cupón aplicado: ${descuento * 100}% de descuento`;
+  } else {
+    descuento = 0;
+    mensaje.style.color = 'red';
+    mensaje.textContent = '✗ Cupón inválido';
+  }
+
+  actualizarTotal();
+});
+
+// ACTUALIZAR TOTAL CON DESCUENTO
+function actualizarTotal() {
+  const subtotal = carrito.reduce((sum, p) => sum + p.precio * p.cantidad, 0);
+  const totalDescuento = subtotal * descuento;
+  const total = subtotal - totalDescuento;
+
+  document.getElementById('carritoSubtotal').textContent = `S/ ${subtotal.toFixed(2)}`;
+  document.getElementById('carritoTotal').textContent = `S/ ${total.toFixed(2)}`;
+
+  const descuentoFila = document.getElementById('descuentoFila');
+  if (descuento > 0) {
+    descuentoFila.style.display = 'flex';
+    document.getElementById('descuentoLabel').textContent = `Descuento (${descuento * 100}%)`;
+    document.getElementById('carritoDescuento').textContent = `-S/ ${totalDescuento.toFixed(2)}`;
+  } else {
+    descuentoFila.style.display = 'none';
+  }
+}
 // REGISTRAR EVENTOS DE TARJETAS
 function registrarEventosTarjetas() {
   document.querySelectorAll('.talla-btn').forEach(btn => {
@@ -106,24 +149,30 @@ function actualizarContador() {
 // RENDERIZAR CARRITO
 function renderizarCarrito() {
   const contenedor = document.getElementById('carritoItems');
-  const totalEl = document.getElementById('carritoTotal');
 
   if (carrito.length === 0) {
     contenedor.innerHTML = '<p style="color:#888; margin-top:20px;">Tu carrito está vacío</p>';
-    totalEl.textContent = 'S/ 0.00';
+    document.getElementById('carritoTotal').textContent = 'S/ 0.00';
     return;
   }
 
-  contenedor.innerHTML = carrito.map(p => `
+contenedor.innerHTML = carrito.map(p => `
     <div style="display:flex; gap:12px; padding:14px 0; border-bottom:1px solid #eee;">
       <img src="${p.imagen}" style="width:70px; height:70px; object-fit:cover;" loading="lazy">
       <div style="flex:1;">
         <p style="font-size:13px; text-transform:uppercase; letter-spacing:1px;">${p.nombre}</p>
-        <p style="font-size:12px; color:#888; margin-top:4px;">Talla: ${p.talla} · Cantidad: ${p.cantidad}</p>
-        <p style="font-size:13px; margin-top:4px;">S/ ${(p.precio * p.cantidad).toFixed(2)}</p>
+        <p style="font-size:12px; color:#888; margin-top:4px;">Talla: ${p.talla}</p>
+        <div style="display:flex; align-items:center; gap:8px; margin-top:8px;">
+          <button data-restar="${p.nombre}-${p.talla}"
+            style="background:none; border:1px solid #222; width:24px; height:24px; cursor:pointer; font-size:14px; display:flex; align-items:center; justify-content:center;">−</button>
+          <span style="font-size:13px;">${p.cantidad}</span>
+          <button data-sumar="${p.nombre}-${p.talla}"
+            style="background:none; border:1px solid #222; width:24px; height:24px; cursor:pointer; font-size:14px; display:flex; align-items:center; justify-content:center;">+</button>
+          <span style="font-size:13px; margin-left:8px;">S/ ${(p.precio * p.cantidad).toFixed(2)}</span>
+        </div>
       </div>
       <button data-eliminar="${p.nombre}-${p.talla}"
-        style="background:none; border:none; cursor:pointer; color:#888; font-size:18px; align-self:center;">
+        style="background:none; border:none; cursor:pointer; color:#888; font-size:18px; align-self:flex-start;">
         ✕
       </button>
     </div>
@@ -138,8 +187,32 @@ function renderizarCarrito() {
     });
   });
 
-  const total = carrito.reduce((sum, p) => sum + p.precio * p.cantidad, 0);
-  totalEl.textContent = `S/ ${total.toFixed(2)}`;
+  document.querySelectorAll('[data-sumar]').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const [nombre, talla] = this.dataset.sumar.split('-');
+      const producto = carrito.find(p => p.nombre === nombre && p.talla === talla);
+      if (producto) producto.cantidad++;
+      actualizarContador();
+      renderizarCarrito();
+    });
+  });
+
+  document.querySelectorAll('[data-restar]').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const [nombre, talla] = this.dataset.restar.split('-');
+      const producto = carrito.find(p => p.nombre === nombre && p.talla === talla);
+      if (producto) {
+        producto.cantidad--;
+        if (producto.cantidad === 0) {
+          carrito = carrito.filter(p => !(p.nombre === nombre && p.talla === talla));
+        }
+      }
+      actualizarContador();
+      renderizarCarrito();
+    });
+  });
+
+  actualizarTotal();
 }
 
 // PANEL CARRITO
@@ -173,12 +246,17 @@ function mostrarNotificacion() {
 function finalizarCompra() {
   if (carrito.length === 0) return;
 
-  const total = carrito.reduce((sum, p) => sum + p.precio * p.cantidad, 0);
+  const subtotal = carrito.reduce((sum, p) => sum + p.precio * p.cantidad, 0);
+  const total = subtotal - subtotal * descuento;
+
   const mensaje = carrito.map(p =>
     `• ${p.nombre} - Talla: ${p.talla} x${p.cantidad} - S/ ${(p.precio * p.cantidad).toFixed(2)}`
   ).join('\n');
 
-  const textoCompleto = `¡Hola! Quiero hacer un pedido:\n\n${mensaje}\n\nTotal: S/ ${total.toFixed(2)}`;
+  const textoCompleto = descuento > 0
+    ? `¡Hola! Quiero hacer un pedido:\n\n${mensaje}\n\nDescuento: ${descuento * 100}%\nTotal: S/ ${total.toFixed(2)}`
+    : `¡Hola! Quiero hacer un pedido:\n\n${mensaje}\n\nTotal: S/ ${total.toFixed(2)}`;
+
   const telefono = '51988294727';
   const url = `https://wa.me/${telefono}?text=${encodeURIComponent(textoCompleto)}`;
 
@@ -200,4 +278,4 @@ document.querySelectorAll('.cat-btn').forEach(btn => {
 });
 
 // INICIAR
-filtrarProductos('todas');  
+filtrarProductos('todas');
