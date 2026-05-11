@@ -832,3 +832,15 @@ footer {
 .btn-whatsapp:hover {
   transform: scale(1.1);
 }
+
+/* ANIMACIONES DE SCROLL */
+.animar {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animar.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

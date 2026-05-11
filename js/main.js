@@ -350,6 +350,19 @@ document.querySelectorAll('.modal').forEach(modal => {
   });
 });
 
+// ANIMACIONES DE SCROLL
+const observador = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.animar').forEach(el => {
+  observador.observe(el);
+});
+
 // CATEGORÍAS
 document.querySelectorAll('.cat-btn').forEach(btn => {
   btn.addEventListener('click', function() {
