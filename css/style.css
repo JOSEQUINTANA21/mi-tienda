@@ -10,7 +10,7 @@ html {
 }
 
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: 'Poppins', sans-serif;
   color: #222;
   background-color: #fff;
 }
@@ -563,16 +563,67 @@ nav ul a {
 footer {
   background-color: #222;
   color: #fff;
-  text-align: center;
-  padding: 40px 20px;
+  padding: 60px 40px 20px;
   margin-top: 60px;
 }
 
-footer p {
+.footer-contenido {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer-columna h4 {
   font-size: 12px;
   letter-spacing: 2px;
   text-transform: uppercase;
+  margin-bottom: 16px;
+  color: #fff;
+}
+
+.footer-columna ul {
+  list-style: none;
+}
+
+.footer-columna ul li {
+  margin-bottom: 10px;
+}
+
+.footer-columna ul a {
+  text-decoration: none;
   color: #aaa;
+  font-size: 12px;
+  letter-spacing: 1px;
+  transition: color 0.2s ease;
+}
+
+.footer-columna ul a:hover {
+  color: #fff;
+}
+
+.footer-bottom {
+  border-top: 1px solid #444;
+  padding-top: 20px;
+  text-align: center;
+}
+
+.footer-bottom p {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #aaa;
+}
+
+@media (max-width: 768px) {
+  footer {
+    padding: 40px 20px 20px;
+  }
+
+  .footer-contenido {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
 }
 
 /* RESPONSIVO TABLET */
@@ -662,6 +713,102 @@ footer p {
   .tarjeta img {
     height: 380px;
   }
+}
+
+/* MODALES */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 3000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal.abierto {
+  display: flex;
+}
+
+.modal-contenido {
+  background-color: #fff;
+  padding: 40px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.modal-cerrar {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #888;
+}
+
+.modal-contenido h3 {
+  font-size: 18px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.modal-contenido p {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+
+.modal-contenido ul {
+  padding-left: 20px;
+  margin-bottom: 12px;
+}
+
+.modal-contenido ul li {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.8;
+}
+
+/* TABLA TALLAS */
+.tabla-tallas {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.tabla-tallas th {
+  background-color: #222;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.tabla-tallas td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  color: #666;
+}
+
+/* FAQ */
+.faq-item {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.faq-item h4 {
+  font-size: 13px;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
 }
 
 /* BOTÓN WHATSAPP FLOTANTE */

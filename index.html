@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tu Tienda</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
@@ -160,10 +161,117 @@
   </section>
 
   <!-- FOOTER -->
-  <footer>
-    <p>síguenos en TikTok · Instagram · WhatsApp</p>
-    <p style="margin-top: 12px;">© 2025 Tu Tienda — Todos los derechos reservados</p>
-  </footer>
+<footer>
+  <div class="footer-contenido">
+    <div class="footer-columna">
+      <h4>Colecciones</h4>
+      <ul>
+        <li><a href="#productos">Todas</a></li>
+        <li><a href="#productos">Poleras</a></li>
+        <li><a href="#productos">Abrigos</a></li>
+      </ul>
+    </div>
+    <div class="footer-columna">
+      <h4>Información</h4>
+      <ul>
+      <li><a href="#" data-modal="modalPolitica">Política de cambios</a></li>
+      <li><a href="#" data-modal="modalTerminos">Términos y condiciones</a></li>
+      </ul>
+    </div>
+    <div class="footer-columna">
+      <h4>Ayuda</h4>
+      <ul>
+        <li><a href="https://wa.me/51988294727" target="_blank">WhatsApp</a></li>
+        <li><a href="#" data-modal="modalFaq">Preguntas frecuentes</a></li>
+        <li><a href="#" data-modal="modalTallas">Guía de tallas</a></li>
+      </ul>
+    </div>
+    <div class="footer-columna">
+      <h4>Síguenos</h4>
+      <ul>
+        <li><a href="#" target="_blank">TikTok</a></li>
+        <li><a href="#" target="_blank">Instagram</a></li>
+        <li><a href="#" target="_blank">Facebook</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Tu Tienda — Todos los derechos reservados</p>
+  </div>
+</footer>
+
+<!-- MODALES -->
+<div class="modal" id="modalPolitica">
+  <div class="modal-contenido">
+    <span class="modal-cerrar" data-cerrar="modalPolitica">✕</span>
+    <h3>Política de Cambios</h3>
+    <p>Aceptamos cambios dentro de los <strong>7 días</strong> posteriores a la entrega del producto.</p>
+    <p>Condiciones para el cambio:</p>
+    <ul>
+      <li>El producto debe estar sin usar y con etiquetas originales.</li>
+      <li>Debe presentar el comprobante de compra.</li>
+      <li>No se aceptan cambios en productos de promoción o descuento.</li>
+    </ul>
+    <p>Para iniciar un cambio contáctanos por WhatsApp con tu número de pedido.</p>
+  </div>
+</div>
+
+<div class="modal" id="modalTerminos">
+  <div class="modal-contenido">
+    <span class="modal-cerrar" data-cerrar="modalTerminos">✕</span>
+    <h3>Términos y Condiciones</h3>
+    <p>Al realizar una compra en nuestra tienda aceptas los siguientes términos:</p>
+    <ul>
+      <li>Los precios están en soles peruanos e incluyen IGV.</li>
+      <li>Los pedidos se confirman una vez realizado el pago.</li>
+      <li>El tiempo de entrega es de 3 a 5 días hábiles.</li>
+      <li>Nos reservamos el derecho de cancelar pedidos con información incorrecta.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="modal" id="modalTallas">
+  <div class="modal-contenido">
+    <span class="modal-cerrar" data-cerrar="modalTallas">✕</span>
+    <h3>Guía de Tallas</h3>
+    <table class="tabla-tallas">
+      <tr>
+        <th>Talla</th>
+        <th>Pecho (cm)</th>
+        <th>Cintura (cm)</th>
+        <th>Cadera (cm)</th>
+      </tr>
+      <tr><td>XS</td><td>80-84</td><td>60-64</td><td>86-90</td></tr>
+      <tr><td>S</td><td>84-88</td><td>64-68</td><td>90-94</td></tr>
+      <tr><td>M</td><td>88-92</td><td>68-72</td><td>94-98</td></tr>
+      <tr><td>L</td><td>92-96</td><td>72-76</td><td>98-102</td></tr>
+      <tr><td>XL</td><td>96-100</td><td>76-80</td><td>102-106</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="modal" id="modalFaq">
+  <div class="modal-contenido">
+    <span class="modal-cerrar" data-cerrar="modalFaq">✕</span>
+    <h3>Preguntas Frecuentes</h3>
+    <div class="faq-item">
+      <h4>¿Cómo realizo mi pedido?</h4>
+      <p>Selecciona tu producto, elige la talla y haz clic en "Agregar al carrito". Luego finaliza tu compra por WhatsApp.</p>
+    </div>
+    <div class="faq-item">
+      <h4>¿Cuánto demora el envío?</h4>
+      <p>El envío tarda entre 3 a 5 días hábiles a todo el país.</p>
+    </div>
+    <div class="faq-item">
+      <h4>¿Cuáles son los métodos de pago?</h4>
+      <p>Aceptamos transferencia bancaria, Yape y Plin.</p>
+    </div>
+    <div class="faq-item">
+      <h4>¿Puedo cambiar mi pedido?</h4>
+      <p>Sí, dentro de los 7 días de recibido el producto. Ver política de cambios.</p>
+    </div>
+  </div>
+</div>
 
   <script src="js/main.js"></script>
   <!-- BOTÓN WHATSAPP -->

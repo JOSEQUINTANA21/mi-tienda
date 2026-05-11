@@ -322,6 +322,34 @@ document.getElementById('enviarResena').addEventListener('click', function() {
   window.open(url, '_blank');
 });
 
+// MODALES - ABRIR
+document.querySelectorAll('[data-modal]').forEach(el => {
+  el.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const modalId = this.dataset.modal;
+    document.getElementById(modalId).classList.add('abierto');
+  });
+});
+
+// MODALES - CERRAR CON BOTÓN
+document.querySelectorAll('.modal-cerrar').forEach(btn => {
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    this.closest('.modal').classList.remove('abierto');
+  });
+});
+
+// MODALES - CERRAR CON CLICK FUERA
+document.querySelectorAll('.modal').forEach(modal => {
+  modal.addEventListener('click', function(e) {
+    if (e.target === this) {
+      this.classList.remove('abierto');
+    }
+  });
+});
+
 // CATEGORÍAS
 document.querySelectorAll('.cat-btn').forEach(btn => {
   btn.addEventListener('click', function() {
