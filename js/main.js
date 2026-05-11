@@ -357,7 +357,7 @@ const observador = new IntersectionObserver((entries) => {
       entry.target.classList.add('visible');
     }
   });
-}, { threshold: 0.1 });
+}, { threshold: 0.2 });
 
 document.querySelectorAll('.animar').forEach(el => {
   observador.observe(el);
@@ -371,6 +371,30 @@ document.querySelectorAll('.cat-btn').forEach(btn => {
     filtrarProductos(this.dataset.categoria);
   });
 });
+
+// CONTADOR REGRESIVO
+function iniciarContador() {
+  const duracion = 24 * 60 * 60; // 24 horas en segundos
+  let tiempo = duracion;
+
+  const intervalo = setInterval(() => {
+    const horas = Math.floor(tiempo / 3600);
+    const minutos = Math.floor((tiempo % 3600) / 60);
+    const segundos = tiempo % 60;
+
+    document.getElementById('contador-tiempo').textContent =
+      `${String(horas).padStart(2, '0')}:${String(minutos).padStart(2, '0')}:${String(segundos).padStart(2, '0')}`;
+
+    if (tiempo <= 0) {
+      clearInterval(intervalo);
+      document.getElementById('contador-tiempo').textContent = '¡OFERTA EXPIRADA!';
+    }
+
+    tiempo--;
+  }, 1000);
+}
+
+iniciarContador();
 
 // INICIAR
 filtrarProductos('todas');

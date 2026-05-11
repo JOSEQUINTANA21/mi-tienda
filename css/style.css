@@ -63,6 +63,25 @@ nav ul a {
   padding-bottom: 1px;
 }
 
+/* CONTADOR OFERTA */
+.contador-oferta {
+  background-color: #e8f5e9;
+  text-align: center;
+  padding: 10px 20px;
+}
+
+.contador-oferta p {
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #222;
+}
+
+#contador-tiempo {
+  font-weight: 600;
+  color: #c0392b;
+}
+
 /* HERO */
 .hero {
   display: flex;
