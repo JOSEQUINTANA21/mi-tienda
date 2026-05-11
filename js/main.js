@@ -268,6 +268,60 @@ document.getElementById('btnFinalizar').addEventListener('click', function(e) {
   finalizarCompra();
 });
 
+
+// ESTRELLAS RESEÑA
+let estrellasSeleccionadas = 0;
+
+document.querySelectorAll('.estrella').forEach(estrella => {
+  estrella.addEventListener('click', function() {
+    estrellasSeleccionadas = Number(this.dataset.valor);
+    document.querySelectorAll('.estrella').forEach(e => {
+      if (Number(e.dataset.valor) <= estrellasSeleccionadas) {
+        e.classList.add('activa');
+      } else {
+        e.classList.remove('activa');
+      }
+    });
+  });
+
+  estrella.addEventListener('mouseover', function() {
+    const valor = Number(this.dataset.valor);
+    document.querySelectorAll('.estrella').forEach(e => {
+      if (Number(e.dataset.valor) <= valor) {
+        e.classList.add('activa');
+      } else {
+        e.classList.remove('activa');
+      }
+    });
+  });
+
+  estrella.addEventListener('mouseout', function() {
+    document.querySelectorAll('.estrella').forEach(e => {
+      if (Number(e.dataset.valor) <= estrellasSeleccionadas) {
+        e.classList.add('activa');
+      } else {
+        e.classList.remove('activa');
+      }
+    });
+  });
+});
+
+// ENVIAR RESEÑA POR WHATSAPP
+document.getElementById('enviarResena').addEventListener('click', function() {
+  const nombre = document.getElementById('resNombre').value.trim();
+  const texto = document.getElementById('resTexto').value.trim();
+  const estrellas = '★'.repeat(estrellasSeleccionadas) + '☆'.repeat(5 - estrellasSeleccionadas);
+
+  if (!nombre || !texto || estrellasSeleccionadas === 0) {
+    alert('Por favor completa todos los campos y selecciona una puntuación');
+    return;
+  }
+
+  const mensaje = `Nueva reseña:\n\nNombre: ${nombre}\nPuntuación: ${estrellas}\nReseña: ${texto}`;
+  const url = `https://wa.me/51988294727?text=${encodeURIComponent(mensaje)}`;
+  window.open(url, '_blank');
+});
+
 // CATEGORÍAS
 document.querySelectorAll('.cat-btn').forEach(btn => {
   btn.addEventListener('click', function() {
