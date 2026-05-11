@@ -357,7 +357,7 @@ const observador = new IntersectionObserver((entries) => {
       entry.target.classList.add('visible');
     }
   });
-}, { threshold: 0.2 });
+}, { threshold: 0.1 });
 
 document.querySelectorAll('.animar').forEach(el => {
   observador.observe(el);
