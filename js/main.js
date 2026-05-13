@@ -119,9 +119,9 @@ function filtrarProductos(categoria) {
         `).join('')}
       </div>
       <a href="#" class="btn-comprar"
-         data-nombre="${p.nombre}"
-         data-precio="${p.precio}"
-         data-imagen="${p.imagen}">Agregar al carrito</a>
+          data-nombre="${p.nombre}"
+          data-precio="${p.precio}"
+          data-imagen="${p.imagen}">Agregar al carrito</a>
     </div>
   `).join('');
 
