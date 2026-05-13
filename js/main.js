@@ -399,3 +399,8 @@ function actualizarTemporizador() {
 
 actualizarTemporizador();
 setInterval(actualizarTemporizador, 1000);
+
+// INICIAR
+document.addEventListener('DOMContentLoaded', function() {
+  filtrarProductos('todas');
+});
