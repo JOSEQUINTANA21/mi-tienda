@@ -373,28 +373,29 @@ document.querySelectorAll('.cat-btn').forEach(btn => {
 });
 
 // CONTADOR REGRESIVO
-function iniciarContador() {
-  const duracion = 24 * 60 * 60; // 24 horas en segundos
-  let tiempo = duracion;
+function actualizarTemporizador() {
+  const ahora = new Date();
+  const objetivo = new Date();
+  objetivo.setHours(23, 59, 0, 0);
 
-  const intervalo = setInterval(() => {
-    const horas = Math.floor(tiempo / 3600);
-    const minutos = Math.floor((tiempo % 3600) / 60);
-    const segundos = tiempo % 60;
+  const diasHastaViernes = (5 - ahora.getDay() + 7) % 7 || 7;
+  objetivo.setDate(ahora.getDate() + diasHastaViernes);
 
-    document.getElementById('contador-tiempo').textContent =
-      `${String(horas).padStart(2, '0')}:${String(minutos).padStart(2, '0')}:${String(segundos).padStart(2, '0')}`;
+  const diferencia = objetivo - ahora;
 
-    if (tiempo <= 0) {
-      clearInterval(intervalo);
-      document.getElementById('contador-tiempo').textContent = '¡OFERTA EXPIRADA!';
-    }
+  if (diferencia <= 0) {
+    document.getElementById('contador-tiempo').textContent = '¡OFERTA EXPIRADA!';
+    return;
+  }
 
-    tiempo--;
-  }, 1000);
+  const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+  const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+  const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+  document.getElementById('contador-tiempo').textContent =
+    `${dias}d ${String(horas).padStart(2, '0')}h ${String(minutos).padStart(2, '00')}m ${String(segundos).padStart(2, '0')}s`;
 }
 
-iniciarContador();
-
-// INICIAR
-filtrarProductos('todas');
+actualizarTemporizador();
+setInterval(actualizarTemporizador, 1000);
